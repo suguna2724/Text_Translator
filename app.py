@@ -42,5 +42,5 @@ if st.button("🔄 Translate"):
             st.success("✅ Translation Result")
             st.write(translation.text)
 
-        except Exception as e:
+        except:
             st.error("❌ Translation failed. Try again later.")

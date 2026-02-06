@@ -1,27 +1,46 @@
-pip install googletrans==4.0.0-rc1
-
+import streamlit as st
 from googletrans import Translator
 
-# Initialize the translator
-translator = Translator()
-
-text = input("Enter text to translate: ")
-dest_lang = input("Enter target language (e.g., 'en' for English, 'fr' for French, 'hi' for Hindi): ")
-
-translation = translator.translate(text, dest=dest_lang)
-print(f"Translated Text: {translation.text}")
-
-from googletrans import Translator
+# Page configuration
+st.set_page_config(page_title="AI Text Translator", page_icon="🌐")
 
 # Initialize translator
 translator = Translator()
 
-# User input
-text = input("Enter text to translate: ")
-dest_lang = input("Enter target language (e.g., 'en' for English, 'fr' for French, 'hi' for Hindi): ")
+# Title
+st.title("🌐 AI Text Translator")
+st.write("Translate text into multiple languages easily.")
 
-# Translate
-translation = translator.translate(text, dest=dest_lang)
+# Language dictionary
+languages = {
+    "English": "en",
+    "Tamil": "ta",
+    "Hindi": "hi",
+    "French": "fr",
+    "Spanish": "es",
+    "German": "de",
+    "Chinese": "zh-cn",
+    "Japanese": "ja"
+}
 
-# Output result
-print(f"Translated Text: {translation.text}")
+# Input text
+text = st.text_area("✍ Enter text to translate")
+
+# Dropdown language selection
+selected_language = st.selectbox("🌍 Select Target Language", list(languages.keys()))
+
+# Translate button
+if st.button("🔄 Translate"):
+
+    if text.strip() == "":
+        st.warning("⚠ Please enter some text")
+    else:
+        try:
+            dest_lang = languages[selected_language]
+            translation = translator.translate(text, dest=dest_lang)
+
+            st.success("✅ Translation Result")
+            st.write(translation.text)
+
+        except Exception as e:
+            st.error("❌ Translation failed. Try again later.")

@@ -8,13 +8,9 @@ st.write("Translate text into multiple languages easily.")
 
 languages = {
     "English": "en",
-    "Tamil": "ta",
     "Hindi": "hi",
-    "French": "fr",
-    "Spanish": "es",
-    "German": "de",
-    "Chinese": "zh-cn",
-    "Japanese": "ja"
+    "French": "fr"
+    
 }
 
 text = st.text_area("✍ Enter text to translate")
@@ -36,3 +32,4 @@ if st.button("🔄 Translate"):
 
         except:
             st.error("❌ Translation failed")
+
